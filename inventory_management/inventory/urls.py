@@ -11,7 +11,6 @@ urlpatterns = [
     path('edit-item/<int:pk>', EditItem.as_view(), name='edit-item'),
     path('delete-item/<int:pk>', DeleteItem.as_view(), name='delete-item'),
     path("signup/", SignUpView.as_view(), name="signup"),
-    #path("login/", auth_views.LoginView.as_view(template_name='inventory/login.html'), name="login"),
     path('login/', CustomLoginView.as_view(template_name='inventory/login.html'), name='login'),
     path("logout/", CustomLogoutView.as_view(), name="logout"),
 ]
