@@ -30,7 +30,7 @@ class Dashboard(LoginRequiredMixin, View):
     def get(self, request):
         items = InventoryItem.objects.all().order_by('id')
         low_inventory_items = InventoryItem.objects.filter(quantity__lte=LOW_QUANTITY)
-
+        
         if low_inventory_items.exists():
             count = low_inventory_items.count()
             word = "items have" if count > 1 else "item has"
@@ -111,7 +111,7 @@ class AddItem(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-@method_decorator(user_passes_test(lambda u: is_admin(u) or is_netværksafdeling(u) or is_kundeservice(u)), name='dispatch') 
+@method_decorator(user_passes_test(lambda u: is_admin(u) or is_netværksafdeling(u) or is_kundeservice(u)), name='dispatch')
 class EditItem(LoginRequiredMixin, UpdateView):
     model = InventoryItem
     form_class = InventoryItemForm
